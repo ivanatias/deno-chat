@@ -1,57 +1,10 @@
-import { Application, Router } from 'https://deno.land/x/oak@v12.4.0/mod.ts'
-import { stream, streamUsers } from './stream.ts'
-import { CLIENTS } from './clients.ts'
-import type {
-  Socket,
-  SocketData as DataFromClient,
-  StreamMessage,
-} from './types.d.ts'
+import { Application, Router } from './deps.ts'
+import { handleSocket } from './socket.ts'
 
 const port = 8080
 const router = new Router()
 
-router.get('/start-chat', (ctx) => {
-  const socket = ctx.upgrade() as Socket
-  const { url } = ctx.request
-
-  const randomUser = `Anonymous-${Math.floor(Math.random() * 1000)}`
-
-  const usernameFromReq = url.searchParams.get('username') || randomUser
-
-  if (CLIENTS.has(usernameFromReq)) {
-    const loggedMessage = `${usernameFromReq} is already connected`
-    console.log(`%c ${loggedMessage}`, 'color: red')
-    return socket.close(1008, loggedMessage)
-  }
-
-  socket.username = usernameFromReq
-
-  console.log(`%c ${usernameFromReq} connected`, 'color: cyan')
-  CLIENTS.set(usernameFromReq, socket)
-
-  socket.onopen = () => {
-    streamUsers()
-  }
-
-  socket.onclose = () => {
-    CLIENTS.delete(socket.username)
-    streamUsers()
-  }
-
-  socket.onmessage = (m) => {
-    const { event, message } = JSON.parse(m.data) as DataFromClient
-
-    if (event === 'send-message') {
-      const messageToClient: StreamMessage = {
-        event,
-        message,
-        username: socket.username,
-      }
-
-      stream(JSON.stringify(messageToClient))
-    }
-  }
-})
+router.get('/start-chat', handleSocket)
 
 const app = new Application()
 
