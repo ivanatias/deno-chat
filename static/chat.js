@@ -39,6 +39,14 @@ socket.onmessage = (message) => {
   if (domHandler) domHandler(data)
 }
 
+socket.onerror = (error) => {
+  console.error(error)
+}
+
+socket.onclose = ({ code }) => {
+  alert(`Connection closed with code: ${code}`)
+}
+
 window.onload = () => {
   const form = select('form')
 

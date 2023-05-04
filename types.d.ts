@@ -1,4 +1,9 @@
-export type Socket = WebSocket & { username: string }
+type Socket = WebSocket & { username: string }
+
+export type UpgradedSocket = {
+  socket: Socket
+  response: Response
+}
 
 type Event = 'send-message' | 'update-users'
 
