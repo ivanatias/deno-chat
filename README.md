@@ -1,6 +1,6 @@
 # Deno Chat
 
-Just experimenting on Web Sockets using Deno
+Just experimenting on WebSockets using Deno
 
 ![Chat screenshot](./screenshots/chat.png)
 
