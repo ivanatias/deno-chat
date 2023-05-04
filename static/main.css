@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-content: center;
+  padding: 20px;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border: 1px dashed black;
+  padding: 20px;
+  width: 600px;
+}
+
+.users-list, .users, form {
+  display: flex;
+  flex-direction: column;
+}
+
+.users-list {
+  gap: 8px;
+  border-bottom: 1px dashed black;
+}
+
+.users {
+  gap: 2px;
+  padding: 4px;
+  font-size: 14px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  font-size: 12px;
+  overflow-y: auto;
+  max-height: 300px;
+  width: 100%;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+form {
+  gap: 8px;
+}
+
+form input {
+  padding: 8px;
+}
+
+form label {
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+form div {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+form button {
+  background-color: dodgerblue;
+  color: white;
+  padding-block: 8px;
+  padding-inline: 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+form button:hover {
+  background-color: deepskyblue;
+}
