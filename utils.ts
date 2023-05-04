@@ -1,4 +1,4 @@
-import { extname } from 'https://deno.land/std@0.185.0/path/mod.ts'
+import { extname } from './deps.ts'
 import { CLIENTS } from './clients.ts'
 import type { StreamUsers } from './types.d.ts'
 

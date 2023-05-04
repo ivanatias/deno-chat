@@ -1,4 +1,4 @@
-import { serve } from 'https://deno.land/std@v0.185.0/http/mod.ts'
+import { serve } from './deps.ts'
 import { handleSocket } from './socket.ts'
 import { serveStatic } from './utils.ts'
 
