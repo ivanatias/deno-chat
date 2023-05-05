@@ -8,6 +8,13 @@ import type {
 } from './types.d.ts'
 
 export function handleSocket(ctx: Context) {
+  const upgrade = ctx.request.headers.get('upgrade')
+
+  if (upgrade !== 'websocket') {
+    ctx.response.status = 400
+    return ctx.response.body = 'Request is not trying to upgrade web socket'
+  }
+
   const socket = ctx.upgrade() as Socket
   const { url } = ctx.request
 
